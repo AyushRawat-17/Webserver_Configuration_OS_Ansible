@@ -1,0 +1,33 @@
+- hosts: webserver
+  vars_files: "{{ ansible_facts['os_family'] }}.yml"
+  tasks:
+  - name: "Installing Apache Webserver "
+    package:
+        name: "{{ os_webserver_package_apache }}"
+        state: present
+
+  - name: "Install PHP"
+    package: 
+        name: "{{ os_webserver_package_php }}"
+        state: present
+
+  - name: "Copying Content "
+    copy:
+        src: "{{ os_webserver_src }}"
+        dest: "{{ os_webserver_dest }}"
+        setype: httpd_sys_content_t
+
+  - name: "Configuring Firewall"
+    firewalld: 
+        port: "80/tcp"
+        state: enabled
+        permanent: yes
+        immediate: yes
+    ignore_errors: yes 
+
+  - name: "Starting Webserver Services" 
+    service:
+         name: "{{ os_webserver_service }}"
+         state: started        
+
+

@@ -1,0 +1,6 @@
+os_webserver_package_apache: "apache2"
+os_webserver_src: "/root/webserverosws_ansible/index.html"
+os_webserver_dest: "/var/www/html/"
+os_webserver_service: "apache2"
+os_webserver_package_php: "php"
+
