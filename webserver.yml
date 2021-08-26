@@ -1,6 +1,11 @@
 - hosts: webserver
   vars_files: "{{ ansible_facts['os_family'] }}.yml"
   tasks:
+  - name: "Updating Packages"
+    package:
+            name: '*'
+            state: latest
+
   - name: "Installing Apache Webserver "
     package:
         name: "{{ os_webserver_package_apache }}"
@@ -12,7 +17,7 @@
         state: present
 
   - name: "Copying Content "
-    copy:
+    template:
         src: "{{ os_webserver_src }}"
         dest: "{{ os_webserver_dest }}"
         setype: httpd_sys_content_t

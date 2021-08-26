@@ -1,5 +1,5 @@
 os_webserver_package_apache: "httpd"
-os_webserver_src: "/root/webserverosws_ansible/index.html"
-os_webserver_dest: "/var/www/html/"
+os_webserver_src: "./index.html.j2"
+os_webserver_dest: "/var/www/html/index.html"
 os_webserver_service: "httpd"
 os_webserver_package_php: "php"
